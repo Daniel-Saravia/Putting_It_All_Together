@@ -206,19 +206,40 @@ void handleKeyboard(unsigned char key, int x, int y)
   glutPostRedisplay();
 }
 
+// Entry point of the program: Initializes the rendering window, sets up callback functions,
+// and enters the main loop where events are processed.
 int main(int argc, char **argv)
 {
+  // Initialize GLUT with command-line parameters
   glutInit(&argc, argv);
+
+  // Set the display mode to double buffering and RGB color
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
+  // Set the initial size of the window
   glutInitWindowSize(1500, 1500);
+
+  // Create the window with a title
   glutCreateWindow("The RGB Color Cube");
 
+  // Register the reshape callback function, which is called
+  // whenever the window is resized
   glutReshapeFunc(reshape);
+
+  // Register the display callback function, which is called
+  // when the window needs to be redrawn
   glutDisplayFunc(display);
+
+  // Register the keyboard callback function, which is called
+  // when a key is pressed
   glutKeyboardFunc(handleKeyboard);
 
+  // Application-specific initialization
   init();
 
+  // Set the timer function to be called after 100 milliseconds
   glutTimerFunc(100, timer, 0);
+
+  // Enter the GLUT main loop, processing events and triggering callbacks
   glutMainLoop();
 }
